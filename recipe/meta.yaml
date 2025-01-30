@@ -26,7 +26,6 @@ requirements:
     - pip
     - cython >=3.0.8
     - numpy >=2.0
-    - ninja-base
     - setuptools
     - wheel
     - meson-python >=0.15.0
@@ -56,6 +55,7 @@ about:
   summary: Miscellaneous tools for data analysis and scientific computing.
   doc_url: https://has2k1.github.io/scikit-misc
   dev_url: https://github.com/has2k1/scikit-misc
+  descrription: Miscellaneous tools for data analysis and scientific computing.
 
 extra:
   recipe-maintainers:
