@@ -12,7 +12,9 @@ source:
 build:
   number: 0
   skip: true  # [py<310]
-  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed -vv
+  script:
+    - python skmisc/_build_utils/version_please.py
+    - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed -vv
   ignore_run_exports:
     - numpy
     - libgfortran5
