@@ -13,7 +13,6 @@ build:
   number: 0
   skip: true  # [py<310]
   script:
-    - python skmisc/_build_utils/version_please.py
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed -vv
   ignore_run_exports:
     - numpy
@@ -23,6 +22,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('fortran') }}
+    - git  # [not win]
   host:
     - python
     - pip
@@ -31,7 +31,6 @@ requirements:
     - setuptools
     - wheel
     - meson-python >=0.15.0
-    - git  # [not win]
   run:
     - python
     - numpy >=1.23.5
@@ -58,7 +57,7 @@ about:
   summary: Miscellaneous tools for data analysis and scientific computing.
   doc_url: https://has2k1.github.io/scikit-misc
   dev_url: https://github.com/has2k1/scikit-misc
-  descrription: Miscellaneous tools for data analysis and scientific computing.
+  description: Miscellaneous tools for data analysis and scientific computing.
 
 extra:
   recipe-maintainers:
