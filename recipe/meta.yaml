@@ -31,6 +31,7 @@ requirements:
     - setuptools
     - wheel
     - meson-python >=0.15.0
+    - git  # [not win]
   run:
     - python
     - numpy >=1.23.5
