@@ -35,7 +35,7 @@ requirements:
   run:
     - python
     - numpy >=1.23.5
-    - libopenblas
+    # - libopenblas
 
 test:
   imports:
