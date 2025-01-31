@@ -1,37 +1,52 @@
 {% set name = "scikit-misc" %}
-{% set version = "0.1.4" %}
+{% set version = "0.5.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/has2k1/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 4fbc48e2f1e7dd614967234fe927a68a229458c8d198c93c9226c36edfa12199
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/scikit_misc-{{ version }}.tar.gz
+  sha256: c5c1f69ac5f84e0103f40525c7d28ecc0ee028314cbc9f07c497cc39143e52a3
 
 build:
-  number: 4
-  skip: true  # [win]
-  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
+  number: 0
+  skip: true  # [py<310]
+  script:
+    - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed -vv
+  ignore_run_exports:
+    - numpy
+    - libgfortran5
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('fortran') }}
+    - git  # [not win]
   host:
     - python
     - pip
-    - cython
-    - numpy
+    - cython >=3.0.8
+    - numpy >=2.0
+    - setuptools
+    - wheel
+    - meson-python >=0.15.0
   run:
     - python
-    - numpy
-    - libopenblas
+    - numpy >=1.23.5
 
 test:
   imports:
     - skmisc
     - skmisc.loess
+  requires:
+    - pip
+    - pytest
+  source_files:
+    - skmisc/loess/tests
+  commands:
+    - pip check
+    - pytest skmisc/loess/tests
 
 about:
   home: https://github.com/has2k1/scikit-misc
@@ -41,6 +56,7 @@ about:
   summary: Miscellaneous tools for data analysis and scientific computing.
   doc_url: https://has2k1.github.io/scikit-misc
   dev_url: https://github.com/has2k1/scikit-misc
+  description: Miscellaneous tools for data analysis and scientific computing.
 
 extra:
   recipe-maintainers:
